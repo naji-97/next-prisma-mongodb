@@ -61,7 +61,7 @@ export default function PostList({ initialPosts }: PostListProps) {
 
             toast.success("Comment added successfully");
             router.refresh();
-
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.error('Error adding comment:', error);
             toast.error(error.message || "Failed to add comment");

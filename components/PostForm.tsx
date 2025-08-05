@@ -54,7 +54,7 @@ export default function PostForm({ users }: PostFormProps) {
 
             toast.success("Post created successfully");
             router.refresh();
-
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             console.error('Error creating post:', error);
             toast.error(error.message || "Failed to create post");
