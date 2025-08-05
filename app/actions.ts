@@ -121,14 +121,16 @@ export async function createUser({ email, name }: { email: string; name?: string
     revalidatePath('/');
     
     return user;
-  } catch (error: any) {
-    // Handle duplicate email error
-    if (error.code === 'P2002') {
+  } catch (error: unknown) {
+  if (typeof error === 'object' && error !== null && 'code' in error) {
+    const code = (error as { code: string }).code;
+    if (code === 'P2002') {
       throw new Error('A user with this email already exists');
     }
-    
-    throw new Error('Failed to create user');
   }
+
+  throw new Error('Failed to create user');
+}
 }
 
 // Post actions
